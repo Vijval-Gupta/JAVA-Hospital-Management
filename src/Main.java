@@ -9,7 +9,6 @@ public class Main {
         patient []patients=new patient[50];
         Scanner sc= new Scanner(System.in);
         System.out.print("Enter number of patients : ");
-
         int n=sc.nextInt();
         System.out.println();
         for (int i=0;i<n;i++){
