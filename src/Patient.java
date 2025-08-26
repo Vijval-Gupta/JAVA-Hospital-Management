@@ -1,19 +1,20 @@
-public class patient {
+public class Patient {
     String name;
     int age;
     String gender;
     String mobile;
     int id;
     String issue;
+    int doctorid=-1;
 
 
-    patient (String name , int age ,String gender , String mobile, int id , String issue){
-        this.name =name;
-        this.gender=gender;
+    Patient(String name , int age , String gender , String mobile, int id , String issue){
+        this.name =name.toUpperCase();
+        this.gender=gender.toLowerCase();
         this.age=age;
         this.mobile=mobile;
         this.id=id;
-        this.issue =issue;
+        this.issue =issue.toLowerCase();
     }
     void display(){
         System.out.println();
@@ -25,4 +26,5 @@ public class patient {
         System.out.println("Issue by patient : "+ issue);
         System.out.println();
     }
+
 }
