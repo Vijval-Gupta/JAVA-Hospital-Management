@@ -77,6 +77,9 @@ public class Main {
                                     System.out.print("Enter mobile number : ");
                                     String mobile = sc.next();
                                     if (!mobile.matches("[0-9]{10}")){
+                                        System.out.println();
+                                        System.out.println("Invalid Mobile Number !!!");
+                                        System.out.println();
                                         ispatient_manager_running=false;
                                         break;
                                     }
@@ -302,7 +305,41 @@ public class Main {
 
                         }
                         else if (initial_choice ==4) {
+                            System.out.print("ENTER PATIENT ID: ");
+                            int pd = sc.nextInt();
+                            if (pd <= 0 || pd > patients.size()) {
+                                System.out.println("Invalid Patient ID!");
+                            } else {
+                                Patient p = patients.get(pd - 1);
+                                System.out.println();
+                                System.out.println();
+                                System.out.println("===============================================================================================");
+                                System.out.println("                                     VIJVAL HOSPITALS                                         ");
+                                System.out.println("                                           BILL                                               ");
+                                System.out.println("-----------------------------------------------------------------------------------------------");
+                                System.out.println("Patient Name   : " + p.name);
+                                System.out.println("Patient ID     : " + (p.id + 1));
+                                System.out.println("Age            : " + p.age );
+                                System.out.println("Gender         : " +p.gender);
+                                System.out.println("Mobile         : " + p.mobile);
+                                System.out.println("Issue          : " + p.issue);
 
+                                if (p.doctorid != -1 && p.doctorid < doctors.size()) {
+                                    Doctor d = doctors.get(p.doctorid);
+                                    System.out.println("Consulting Dr. : " + d.name + " (Speciality: " + d.speciality + ")");
+                                } else {
+                                    System.out.println("Consulting Dr. : Not Assigned");
+                                }
+                                System.out.println();
+                                System.out.println("Consultation Fee : ");
+                                System.out.println();
+                                System.out.println();
+                                System.out.println("-----------------------------------------------------------------------------------------------");
+                                System.out.println("                THANK YOU FOR VISITING VIJVAL HOSPITALS – GET WELL SOON!                       ");
+                                System.out.println("==============================================================================================");
+                                System.out.println();
+                                System.out.println();
+                            }
                         }
                         else if (initial_choice ==5) {
                             isrunning=false;
