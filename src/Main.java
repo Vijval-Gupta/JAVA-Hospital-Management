@@ -277,7 +277,7 @@ public class Main {
                                 System.out.println("Press : ");
                                 System.out.println("      1 --> Book Appointment ");
                                 System.out.println("      2 --> To View Appointment");
-                                System.out.println("      3 --> @@@  # currently not available (Edit) ");
+                                System.out.println("      3 --> Edit Appointment ");
                                 System.out.println("      4 --> To Cancel Appointment");
                                 System.out.println("      5 --> Return to MAIN MENU ");
                                 System.out.print("Enter choice : ");
@@ -322,6 +322,14 @@ public class Main {
                                                                 System.out.println();
                                                                 System.out.println("---- Doctor Details ----");
                                                                 doctors.get(i).display();
+                                                            }
+                                                            else if(timechecker(time)==-1){
+                                                                System.out.println("Invalid time format !!");
+                                                                break;
+                                                            }
+                                                            else {
+                                                                System.out.println("Doctor does not sit at that time !! Please take appointment for another time..");
+                                                                break;
                                                             }
 
                                                             found_flag=1;
@@ -378,6 +386,36 @@ public class Main {
                                         System.out.println();
                                         doctors.get(docid).display();
                                     }
+                                }
+                                else if (appoint_choice==3){
+                                    System.out.println("Enter new Date : ");
+                                    String date=sc.next();
+                                    if (!datechecker(date)){
+                                        System.out.println("Invalid Date !!");
+                                        break;
+                                    }
+                                    if(patients.get(pat_id).appointment_date==date){
+                                        System.out.println("Old date and new date cannot be same ..");
+                                        break;
+                                    }
+                                    System.out.println("Enter Time : ");
+                                    String time=sc.next();
+                                    if(timechecker(time)==-1){
+                                        patients.get(pat_id).appointment_date=date;
+                                        patients.get(pat_id).appointment_time=time;
+                                        System.out.println();
+                                        System.out.println("Appointment Changed Successfully ..");
+                                        System.out.println();
+                                    }
+                                    else if(timechecker(time)==-1){
+                                        System.out.println("Invalid time format !!");
+                                        break;
+                                    }
+                                    else {
+                                        System.out.println("Doctor does not sit at that time !! Please take appointment for another time..");
+                                        break;
+                                    }
+
                                 }
                                 else if (appoint_choice==4){
                                     patients.get(pat_id).doctorid=-1;
@@ -443,6 +481,36 @@ public class Main {
                     }
                 }
                 else if (mode_choice==2){
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                 }
                 else {
