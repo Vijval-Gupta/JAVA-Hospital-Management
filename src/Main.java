@@ -10,7 +10,82 @@ import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
 
+
+
 public class Main {
+
+    static boolean datechecker(String date){
+        if (date.length()!=10){
+            return false;
+        }
+        try {
+            int day=Integer.parseInt(date.substring(0,2));
+            if (day>31||day<1){
+                return false;
+            }
+            int month=Integer.parseInt(date.substring(3,5));
+            if (month<1||month>12){
+                return false;
+            }
+            if (day==31){
+                if (!(month==1||month==3||month==5||month==7||month==8||month==10||month==12)){
+                    return false;
+                }
+            }
+            int year=Integer.parseInt(date.substring(7));
+            if (year<2025){
+                return false;
+            }
+            if (year==2025){
+                if (month<10){
+                    return false;
+                }
+                if (month==10&&day<17){
+                    return false;
+                }
+            }
+
+        }
+        catch (Exception e){
+            return false;
+        }
+
+        return true;
+    }
+
+    static int  timechecker(String time){
+
+        // returns -1 indicating invalid time format
+        // returns 1 if everything is fine
+        // returns 2 if hospital is not open at that time
+        if (time.length()!=5){
+            return -1;
+        }
+        try{
+            int hour =Integer.parseInt(time.substring(0,2));
+            if(hour==24){
+                return 2;
+            }
+            if(hour>24){
+                return -1;
+            }
+            int minute=Integer.parseInt(time.substring(3));
+            if (minute>59){
+                return -1;
+            }
+
+            if (hour<8||hour>20){
+                return 2;
+            }
+        }
+        catch (Exception e ){
+            return -1;
+        }
+
+        return 1;
+    }
+
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.println("----------------------------------------------------------");
@@ -231,10 +306,24 @@ public class Main {
                                                 for (int i=0;i<doctors.size();i++){
                                                     if (doctors.get(i).speciality.equals(particular_speciality)){
                                                         if (doctors.get(i).is_available.equals("yes")){
-                                                            System.out.println("Appointment Booked Successfully ");
-                                                            System.out.println();
-                                                            System.out.println("---- Doctor Detail ----");
-                                                            doctors.get(i).display();
+                                                            System.out.print("Enter the date you want to get appointment (dd/mm/yy) : ");
+                                                            String date=sc.next();
+                                                            if (!datechecker(date)){
+                                                                System.out.println("Invalid !!! .. check format and date again ...");
+                                                                break;
+                                                            }
+                                                            System.out.print("Enter time (in 24 hr format {09:00}) you want to come on "+date+" (appointments are only between 08:00 and 20:00) : ");
+                                                            String time=sc.next();
+                                                            if(timechecker(time)==1){
+                                                                patients.get(pat_id).appointment_date=date;
+                                                                patients.get(pat_id).appointment_time=time;
+                                                                System.out.println();
+                                                                System.out.println("Appointment Booked Successfully ");
+                                                                System.out.println();
+                                                                System.out.println("---- Doctor Details ----");
+                                                                doctors.get(i).display();
+                                                            }
+
                                                             found_flag=1;
                                                             break;
                                                         }
@@ -284,6 +373,9 @@ public class Main {
                                         System.out.println("No Appointment Scheduled !!!");
                                     }
                                     else {
+                                        System.out.println("Appointment Date : "+patients.get(pat_id).appointment_date);
+                                        System.out.println("Appointment Date : "+patients.get(pat_id).appointment_time);
+                                        System.out.println();
                                         doctors.get(docid).display();
                                     }
                                 }

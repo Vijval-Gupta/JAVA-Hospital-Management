@@ -6,6 +6,8 @@ public class Patient {
     int id;
     String issue;
     int doctorid=-1;
+    String appointment_date="";
+    String appointment_time="";
 
 
     Patient(String name , int age , String gender , String mobile, int id , String issue){
