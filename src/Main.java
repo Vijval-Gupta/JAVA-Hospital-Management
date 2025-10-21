@@ -10,9 +10,26 @@ import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
 
+///  break ki jagah continue use karke dekho
+
 
 
 public class Main {
+
+
+    static boolean contact_checker(String contact){
+        if (!contact.matches("[0-9]{10}")){
+            return false;
+        }
+        return true;
+    }
+
+    static boolean gender_check(String gender){
+        if (!gender.equalsIgnoreCase("male") && !gender.equalsIgnoreCase("female")){
+            return false;
+        }
+        return true;
+    }
 
     static boolean datechecker(String date){
         if (date.length()!=10){
@@ -112,10 +129,12 @@ public class Main {
                 int mode_choice=sc.nextInt();
                 System.out.println();
                 if (mode_choice==1) {
+                    System.out.println();
                     System.out.println("---- USER MODE ----");
                     System.out.println();
                     boolean isrunning=true;
                     while (isrunning) {
+                        System.out.println();
                         System.out.println("Press : ");
                         System.out.println("      1 --> Patient Manager");
                         System.out.println("      2 --> Doctor Viewer ");
@@ -143,21 +162,32 @@ public class Main {
                                     String name =sc.nextLine();
                                     System.out.print("Enter Age : ");
                                     int age = sc.nextInt();
+                                    if(age<0){
+                                        System.out.println();
+                                        System.out.println("Invalid Age !!");
+                                        ispatient_manager_running=false;
+                                        break;
+                                    }
                                     System.out.print("Enter Gender (male/female): ");
                                     String gender = sc.next();
-                                    if (!gender.equalsIgnoreCase("male") && !gender.equalsIgnoreCase("female")){
+                                    if(!gender_check(gender)){
+                                        System.out.println();
+                                        System.out.println("Invalid Gender !!");
+                                        System.out.println();
                                         ispatient_manager_running=false;
                                         break;
                                     }
+
                                     System.out.print("Enter mobile number : ");
                                     String mobile = sc.next();
-                                    if (!mobile.matches("[0-9]{10}")){
+                                    if(!contact_checker(mobile)){
                                         System.out.println();
-                                        System.out.println("Invalid Mobile Number !!!");
+                                        System.out.println("Invalid Contact Number !!");
                                         System.out.println();
                                         ispatient_manager_running=false;
                                         break;
                                     }
+
                                     sc.nextLine();
                                     System.out.print("Enter your Issue : ");
                                     String issue=sc.nextLine();
@@ -169,7 +199,8 @@ public class Main {
                                     System.out.println("Your ID : "+(patient_counter+1));
                                     patient_counter++;
 
-                                } else if (patientmanager_choice == 2) {
+                                }
+                                else if (patientmanager_choice == 2) {
                                     System.out.println("Enter patient ID : ");
                                     int id_request=sc.nextInt();
                                     if (patient_ids.contains(id_request-1)){
@@ -466,7 +497,7 @@ public class Main {
                                 System.out.println();
                                 System.out.println("-----------------------------------------------------------------------------------------------");
                                 System.out.println("                THANK YOU FOR VISITING VIJVAL HOSPITALS – GET WELL SOON!                       ");
-                                System.out.println("==============================================================================================");
+                                System.out.println("===============================================================================================");
                                 System.out.println();
                                 System.out.println();
                             }
@@ -481,6 +512,265 @@ public class Main {
                     }
                 }
                 else if (mode_choice==2){
+                    System.out.println();
+                    boolean isrunning=true;
+                    while (isrunning){
+                        System.out.println();
+                        System.out.println("Press : ");
+                        System.out.println("      1 --> Patient Manager");
+                        System.out.println("      2 --> Doctor Viewer ");
+                        System.out.println("      3 --> Appointment Related ");
+                        System.out.println("      4 --> Bill Receipt ");
+                        System.out.println("      5 --> EXIT   ");
+                        System.out.println();
+                        System.out.print("Enter choice : ");
+                        int initial_choice = sc.nextInt();
+                        if (initial_choice == 1) {
+                            boolean ispatient_manager_running=true;
+                            while (ispatient_manager_running) {
+                                System.out.println();
+                                System.out.println("Press : ");
+                                System.out.println("      1 --> Add patient details");
+                                System.out.println("      2 --> View patient details");
+                                System.out.println("      3 --> Return to Main menu  ");
+                                System.out.print("Enter choice : ");
+                                int patientmanager_choice = sc.nextInt();
+                                if (patientmanager_choice == 1) {
+                                    System.out.println();
+                                    System.out.println("--- Enter patient details ----");
+                                    System.out.print("Enter Full Name : ");
+                                    sc.nextLine();
+                                    String name =sc.nextLine();
+                                    System.out.print("Enter Age : ");
+                                    int age = sc.nextInt();
+                                    if(age<0){
+                                        System.out.println();
+                                        System.out.println("Invalid Age !!");
+                                        ispatient_manager_running=false;
+                                        break;
+                                    }
+                                    System.out.print("Enter Gender (male/female): ");
+                                    String gender = sc.next();
+                                    if(!gender_check(gender)){
+                                        System.out.println();
+                                        System.out.println("Invalid Gender !!");
+                                        System.out.println();
+                                        ispatient_manager_running=false;
+                                        break;
+                                    }
+
+                                    System.out.print("Enter mobile number : ");
+                                    String mobile = sc.next();
+                                    if(!contact_checker(mobile)){
+                                        System.out.println();
+                                        System.out.println("Invalid Contact Number !!");
+                                        System.out.println();
+                                        ispatient_manager_running=false;
+                                        break;
+                                    }
+
+                                    sc.nextLine();
+                                    System.out.print("Enter your Issue : ");
+                                    String issue=sc.nextLine();
+                                    patients.add(new Patient(name , age,gender,mobile,patient_counter ,issue));
+                                    patient_ids.add(patient_counter);
+
+                                    System.out.println();
+                                    System.out.println("Patient registered successfully ...");
+                                    System.out.println("Your ID : "+(patient_counter+1));
+                                    patient_counter++;
+
+                                }
+                                else if (patientmanager_choice == 2) {
+                                    System.out.println("Enter patient ID : ");
+                                    int id_request=sc.nextInt();
+                                    if (patient_ids.contains(id_request-1)){
+                                        patients.get(id_request-1).display();
+                                    }
+                                    else {
+                                        System.out.println();
+                                        System.out.println("There is no patient with such id !!!");
+                                        System.out.println();
+                                    }
+
+
+                                }
+                                else if (patientmanager_choice==3){
+                                    System.out.print("Enter patient Id : ");
+                                    int pat_id=sc.nextInt();
+                                    if(!patient_ids.contains(pat_id)){
+                                        System.out.println("No patient with ID - "+pat_id);
+                                        System.out.println();
+                                    }
+                                    else{
+                                        System.out.println();
+                                        System.out.println("Press : ");
+                                        System.out.println("      1 --> Edit patient name ");
+                                        System.out.println("      2 --> Edit patient gender ");
+                                        System.out.println("      3 --> Edit patient mobile number ");
+                                        System.out.println("      4 --> Edit patient age ");
+                                        System.out.println("      5 --> Edit patient appointment date ");
+                                        System.out.println("      6 --> Edit patient appointment time ");
+                                        System.out.println("      7 --> Edit All patient basic details ");
+                                        System.out.println("      8 --> Return to Main Menu ");
+                                        System.out.println();
+
+                                        int edit_choice=sc.nextInt();
+                                        if(edit_choice==1){
+                                            System.out.print("Enter updated name : ");
+                                            patients.get(pat_id).name=sc.nextLine();
+                                            System.out.println();
+                                            System.out.println("Updated Name successfully ...");
+                                            System.out.println();
+                                        }
+                                        else if(edit_choice==2){
+                                            System.out.print("Enter Updated Gender (male/female): ");
+                                            String gender = sc.next();
+                                            if(!gender_check(gender)){
+                                                System.out.println();
+                                                System.out.println("Invalid Gender !!");
+                                                System.out.println();
+                                                ispatient_manager_running=false;
+                                                break;
+                                            }
+                                            else{
+                                                patients.get(pat_id).gender=gender;
+                                                System.out.println();
+                                                System.out.println("Updated Gender successfully ...");
+                                                System.out.println();
+                                            }
+                                        }
+                                        else if(edit_choice==3){
+                                            System.out.print("Enter updated contact number : ");
+                                            String mobile = sc.next();
+                                            if(!contact_checker(mobile)){
+                                                System.out.println();
+                                                System.out.println("Invalid Contact Number !!");
+                                                System.out.println();
+                                                ispatient_manager_running=false;
+                                                break;
+                                            }
+                                            else{
+                                                patients.get(pat_id).mobile=mobile;
+                                                System.out.println();
+                                                System.out.println("Updated Mobile Number Successfully ...");
+                                            }
+                                        }
+                                        else if(edit_choice==4){
+                                            System.out.print("Enter updated age : ");
+                                            int age = sc.nextInt();
+                                            if(age<0){
+                                                System.out.println();
+                                                System.out.println("Invalid Age !!");
+                                                System.out.println();
+                                                ispatient_manager_running=false;
+                                                break;
+                                            }
+                                            else{
+                                                patients.get(pat_id).age=sc.nextInt();
+                                                System.out.println();
+                                                System.out.println("Updated Age Successfully ...");
+                                                System.out.println();
+                                            }
+
+                                        }
+                                        else if(edit_choice==5){
+                                            System.out.print("Enter updated appointment date (dd/mm/yy): ");
+                                            String date=sc.next();
+                                            if(!datechecker(date)){
+                                                System.out.println();
+                                                System.out.println("Invalid date format or Invalid date !!!");
+                                                System.out.println();
+                                                ispatient_manager_running=false;
+                                                break;
+                                            }
+                                            else{
+                                                patients.get(pat_id).appointment_date=date;
+                                                System.out.println();
+                                                System.out.println("Updated Appointment Date Successfully ...");
+                                                System.out.println();
+                                            }
+                                        }
+                                        else if(edit_choice==6){
+                                            System.out.print("Enter time (in 24 hr format {09:00}) you want to come on "+patients.get(pat_id).appointment_date+" (appointments are only between 08:00 and 20:00) : ");
+                                            String time=sc.next();
+                                            if(timechecker(time)==1){
+                                                patients.get(pat_id).appointment_time=time;
+                                                System.out.println();
+                                                System.out.println("Updated Appointment Successfully ... ");
+                                                System.out.println();
+                                            }
+                                            else if(timechecker(time)==-1){
+                                                System.out.println("Invalid time format !!");
+                                                break;
+                                            }
+                                            else {
+                                                System.out.println("Doctor does not sit at that time !! Please take appointment for another time..");
+                                                break;
+                                            }
+
+                                        }
+                                        else if (edit_choice==7){
+                                            System.out.println();
+                                            System.out.print("Enter Full Name : ");
+                                            sc.nextLine();
+                                            String name =sc.nextLine();
+                                            System.out.print("Enter Updated Age : ");
+                                            int age = sc.nextInt();
+                                            if(age<0){
+                                                System.out.println();
+                                                System.out.println("Invalid Age !!");
+                                                ispatient_manager_running=false;
+                                                break;
+                                            }
+                                            System.out.print("Enter Updated Gender (male/female): ");
+                                            String gender = sc.next();
+                                            if(!gender_check(gender)){
+                                                System.out.println();
+                                                System.out.println("Invalid Gender !!");
+                                                System.out.println();
+                                                ispatient_manager_running=false;
+                                                break;
+                                            }
+
+                                            System.out.print("Enter Updated mobile number : ");
+                                            String mobile = sc.next();
+                                            if(!contact_checker(mobile)){
+                                                System.out.println();
+                                                System.out.println("Invalid Contact Number !!");
+                                                System.out.println();
+                                                ispatient_manager_running=false;
+                                                break;
+                                            }
+                                        }
+                                        else if (edit_choice==8){
+                                            ispatient_manager_running=false;
+                                            break;
+                                        }
+                                        else{
+                                            System.out.println();
+                                            System.out.println("Invalid choice !!!");
+                                            System.out.println();
+                                        }
+                                    }
+                                }
+
+                                else if (patientmanager_choice == 4) {
+                                    ispatient_manager_running=false;
+                                    break;
+                                } else {
+                                    System.out.println("Enter Valid choice !!!!");
+                                }
+                            }
+
+                        }
+
+
+
+
+
+                    }
+
 
 
 
